@@ -47,7 +47,7 @@ public class XmlConfiguration implements AbbreviatorConfiguration {
 	private class AbbreviationsMap extends AbstractMap<String, String> {
 		@Override
 		public Set<Entry<String, String>> entrySet() {
-			return Collections.unmodifiableSet(new HashSet<Entry<String, String>>(abbreviations));
+			return Collections.unmodifiableSet(new HashSet<Entry<String, String>>(internalGetAbbreviations()));
 		}
 
 		@Override
@@ -56,13 +56,21 @@ public class XmlConfiguration implements AbbreviatorConfiguration {
 				return null;
 			}
 
-			for (XmlAbbreviatorConfiguration config : abbreviations) {
+			for (XmlAbbreviatorConfiguration config : internalGetAbbreviations()) {
 				if (key.equals(config.getText())) {
 					return config.getReplacement();
 				}
 			}
 
 			return null;
+		}
+
+		private List<XmlAbbreviatorConfiguration> internalGetAbbreviations() {
+			if (abbreviations == null) {
+				return Collections.emptyList();
+			}
+
+			return abbreviations;
 		}
 	}
 
