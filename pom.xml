@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.aludratest</groupId>
 	<artifactId>log4testing</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Log4Testing</name>
 	<description>A configurable Logging Framework for generic test execution logging. Supports several output formats, including XML and HTML, and can be connected to different testing frameworks.</description>
@@ -328,7 +328,7 @@
 		<connection>scm:git:https://git@github.com:AludraTest/${project.artifactId}.git</connection>
 		<developerConnection>scm:git:https://git@github.com/AludraTest/${project.artifactId}.git</developerConnection>
 		<url>https://github.com/AludraTest/${project.artifactId}.git</url>
-		<tag>log4testing-1.0.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
