@@ -18,6 +18,7 @@ import org.aludratest.log4testing.AttachmentLog;
 import org.aludratest.log4testing.NamedTestLogElement;
 import org.aludratest.log4testing.TestCaseLog;
 import org.aludratest.log4testing.TestLogElement;
+import org.aludratest.log4testing.TestStatus;
 import org.aludratest.log4testing.TestStepGroupLog;
 import org.aludratest.log4testing.TestStepLog;
 import org.aludratest.log4testing.TestSuiteLog;
@@ -263,7 +264,21 @@ public class XmlTestLogWriter implements TestLogWriter {
 		writeAttributeElement("endTime", element.getEndTime());
 		writeAttributeElement("duration", element.getDuration());
 		writeAttributeElement("work", element.getWork());
-		writeAttributeElement("status", element.getStatus());
+
+		// for ignored test cases, check if there is a test step group with a non-ignored status, and use that
+		TestStatus status = element.getStatus();
+		if (element instanceof TestCaseLog) {
+			TestCaseLog testCase = (TestCaseLog) element;
+			if (testCase.isIgnored()) {
+				for (TestStepGroupLog group : testCase.getTestStepGroups()) {
+					if (group.getStatus() != TestStatus.IGNORED) {
+						status = group.getStatus();
+						// no break here; use last non-ignored status
+					}
+				}
+			}
+		}
+		writeAttributeElement("status", status);
 	}
 
 	private void writeAttributeElement(String attributeName, Object value) throws XMLStreamException {
