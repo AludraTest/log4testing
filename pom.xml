@@ -115,6 +115,14 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
+			
+			<!-- important to use recent Release Plugin version for Git -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.2</version>
+			</plugin>
+			
 
 			<!-- download and extract JQuery JS during generate-resources (required for HTML log) -->
 			<plugin>
@@ -286,7 +294,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-release-plugin</artifactId>
-						<version>2.5.1</version>
+						<version>2.5.2</version>
 						<configuration>
 							<goals>deploy site-deploy</goals>
 						</configuration>
