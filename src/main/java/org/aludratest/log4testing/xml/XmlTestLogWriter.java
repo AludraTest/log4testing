@@ -270,10 +270,15 @@ public class XmlTestLogWriter implements TestLogWriter {
 		if (element instanceof TestCaseLog) {
 			TestCaseLog testCase = (TestCaseLog) element;
 			if (testCase.isIgnored()) {
-				for (TestStepGroupLog group : testCase.getTestStepGroups()) {
-					if (group.getStatus() != TestStatus.IGNORED) {
-						status = group.getStatus();
-						// no break here; use last non-ignored status
+				if (!testCase.isFailed()) {
+					status = TestStatus.PASSED;
+				}
+				else {
+					for (TestStepGroupLog group : testCase.getTestStepGroups()) {
+						if (group.getStatus() != TestStatus.IGNORED && group.getStatus() != TestStatus.PASSED) {
+							status = group.getStatus();
+							// no break here; use last non-ignored, failed status
+						}
 					}
 				}
 			}
