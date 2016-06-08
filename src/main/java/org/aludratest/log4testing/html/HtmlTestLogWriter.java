@@ -211,12 +211,18 @@ public class HtmlTestLogWriter implements TestLogWriter {
 		return path;
 	}
 
+	private TimeFormat timeFormat = new TimeFormat();
+
+	private HtmlFormat htmlFormat = new HtmlFormat();
+
+	private PathHelper pathHelper = new PathHelper();
+
 	private VelocityContext createContext(NamedTestLogElement testObject, String variableName) {
 		VelocityContext context = new VelocityContext();
 		context.put(variableName, testObject);
-		context.put("time", new TimeFormat());
-		context.put("html", new HtmlFormat());
-		context.put("pathHelper", new PathHelper());
+		context.put("time", timeFormat);
+		context.put("html", htmlFormat);
+		context.put("pathHelper", pathHelper);
 		return context;
 	}
 
@@ -292,6 +298,9 @@ public class HtmlTestLogWriter implements TestLogWriter {
 	 */
 	public class TimeFormat {
 
+		private TimeFormat() {
+		}
+
 		public String format(Object object) {
 			if (object instanceof DateTime) {
 				return formatDateTime((DateTime) object);
@@ -364,18 +373,16 @@ public class HtmlTestLogWriter implements TestLogWriter {
 			}
 			File attachmentFile = new File(rootFolder, "__attachments/step" + step.getId() + "/attachment" + index + "."
 					+ attachment.getFileExtension());
-			if (!attachmentFile.isFile()) {
-				attachmentFile.getParentFile().mkdirs();
-				InputStream in = attachment.getFileContents();
-				try {
-					writeToFile(in, attachmentFile);
-				}
-				catch (IOException e) {
-					LOG.warn("Could not write attachment file " + attachmentFile.getAbsolutePath(), e);
-				}
-				finally {
-					IOUtils.closeQuietly(in);
-				}
+			attachmentFile.getParentFile().mkdirs();
+			InputStream in = attachment.getFileContents();
+			try {
+				writeToFile(in, attachmentFile);
+			}
+			catch (IOException e) {
+				LOG.warn("Could not write attachment file " + attachmentFile.getAbsolutePath(), e);
+			}
+			finally {
+				IOUtils.closeQuietly(in);
 			}
 
 			TestStepLogContainer container = step;
