@@ -80,7 +80,7 @@
 				#end	
 			</tr>
 			#foreach($testCase in $testSuite.TestCases)
-			<tr class="#if ($testCase.Ignored)IGNORED#{else}$testCase.Status#end">
+			<tr class="#if ($testCase.Ignored && !$testCase.Failed)IGNORED_PASSED#{elseif} ($testCase.Ignored && $testCase.Failed)IGNORED_FAILED#{else}$testCase.Status#end">
 				<td><a href="${pathHelper.getPathToBaseDir($testSuite)}/${pathHelper.getPathFromBaseDir($testCase)}">$testCase.Name</a></td>
 				<td align="center">$time.format($!testCase.Duration)</td>
 				<td align="center">$testCase.NumberOfTestSteps</td>

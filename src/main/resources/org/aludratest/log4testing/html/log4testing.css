@@ -4,8 +4,11 @@
 .RUNNING {
 	background-color:#FFA500;
 }
-.IGNORED {
+.IGNORED, .IGNORED_FAILED {
 	background-color:#BBBBBB;
+}
+.IGNORED_PASSED {
+	background-color:#CCCCCC;
 }
 .PENDING {
 	background-color:#FFFFFF;
