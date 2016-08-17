@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+       "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>$!testCase.Name</title>
+	<link rel="stylesheet" type="text/css" href="${pathHelper.getPathToBaseDir($testCase)}/log4testing.css">
+	<script src="${pathHelper.getPathToBaseDir($testCase)}/jquery.js"></script>
+	<script type="text/javascript" src="${pathHelper.getPathToBaseDir($testCase)}/testcase.js"></script>
+</head>
+<body>
+	<h1>$!testCase.Name</h1>
+	
+	<h2>Summary</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Starting&nbsp;Time</th>
+				<th>Finishing&nbsp;Time</th>
+				<th>Duration<br/>[hh:mm:ss.ms]</th>
+				<th>Test&nbsp;steps</th>
+				<th>Failed</th>
+				<th>Error&nbsp;Message</th>
+				#if ($testCase.IgnoredReason) 
+				<th>Reason for Skipping</th>
+				#end 
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="$testCase.Status">
+				<td>$time.format($!testCase.StartTime)</td>
+				<td>$time.format($!testCase.EndTime)</td>
+			    <td>$time.format($!testCase.Duration)</td>
+				<td>$testCase.NumberOfTestSteps</td>
+				<td>#if ($testCase.isFailed()) 1 #else 0 #end</td>
+				<td><a href="#teststep$!{testCase.LastFailedStep.Id}" onClick="$('#ts$!{testCase.LastFailedStep.Id}').parent().show();$('#ts$!{testCase.LastFailedStep.Id}').parent().prev().find('h3 a').text('[-]')">$!testCase.LastFailedStep.ErrorMessage</a></td>
+				#if ($testCase.IgnoredReason) 
+				<td>$testCase.IgnoredReason</td>
+				#end 
+			</tr>
+		</tbody>
+	</table>
+	
+	<h2>Test Step Groups</h2>
+	<table>
+		<tbody>
+		#foreach($group in $testCase.TestStepGroups)
+			<tr class="$group.Status">
+    		#if ("$group.TestSteps.size()" != 0)
+				<td colspan="11"><h3>
+				<a class="btn small" onClick="toggle($group.Id)" id="shbteststepgroup$group.Id">#if($group.Status.Failure)[-]#else[+]#end</a>
+				$group.Name<small> ($group.TestSteps.size() test step#if ($group.TestSteps.size() > 1)s#end#if ($group.Status.Failure), error(s) occurred#end)</small></h3> 
+				</td>
+			#else 
+				<td colspan="11"><h3>$group.Name</h3></td>
+			#end			
+			</tr>
+			#if($group.Status.Failure)
+			<tbody id="teststepgroup$group.Id">
+			#else
+			<tbody id="teststepgroup$group.Id" style="display: none">
+			#end
+			<tr class="passed">
+				<th>Started</th>
+				<th>Command</th>
+				<th>Element&nbsp;Type</th>
+				<th>Element&nbsp;Name</th>
+				<th>Data</th>
+				<th>Error&nbsp;Message</th>
+				<th>Result / Attachments</th>
+				<th>Service</th>
+				<th>Technical&nbsp;Locator</th>
+				<th>Technical Arguments</th>
+				<th>Comment</th>
+			</tr>
+			#foreach($testStep in $group.TestSteps)
+    			<tr class="$testStep.Status" id="ts$!{testStep.Id}">
+				<td>${testStep.StartTimeOffsetSeconds}s</td>
+				<td><strong><span id="teststep${testStep.Id}">$!testStep.Command</a></span></strong></td>
+				<td>$!testStep.ElementType</td>
+				<td>$!testStep.ElementName</td>
+				<td>$!testStep.UsedArguments</td>
+				<td>$!testStep.ErrorMessage</td>
+				<td>
+					#if ($testStep.Result)
+						$testStep.Result<br/>
+					#end
+					#foreach($attachment in $testStep.Attachments)
+						&gt;&gt;&nbsp;
+						#set( $attachmentFileName =  $pathHelper.getPathToAttachment($testStep, $attachment))
+						#if (${attachmentFileName})
+							<a href="${attachmentFileName}" class="btn small primary" target="_blank">$attachment.Label</a>
+						#else
+							$attachment.Label
+						#end
+						<br/>
+					#end
+				</td>
+				<td>$!testStep.Service</td>
+				<td>$!testStep.TechnicalLocator</td>
+				<td>$!testStep.TechnicalArguments</td>
+				<td>$html.format($!testStep.Comment)</td>
+			</tr>
+			#end
+			</tbody>
+		#end
+		</tbody>
+	</table>
+</body>
+</html>

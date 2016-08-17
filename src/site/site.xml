@@ -1,0 +1,25 @@
+<project name="Log4Testing" xmlns="http://maven.apache.org/DECORATION/1.6.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.6.0 http://maven.apache.org/xsd/decoration-1.6.0.xsd">
+  
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-fluido-skin</artifactId>
+    <version>1.4</version>
+  </skin>
+  
+  <body>
+  	<menu name="User Documentation">
+  		<item name="Configuration" href="configuration.html">
+  			<item name="Log Writers and Filters" href="writers.html">
+  				<item name="HTML Writer" href="htmlwriter.html" />
+  				<item name="XML Writer" href="xmlwriter.html" />
+  				<item name="RegExp Test Step Filter" href="regexpfilter.html" />
+  				<item name="NoSteps Test Step Filter" href="nostepsfilter.html" />
+  			</item>
+  		</item>
+  	</menu>
+ 
+    <menu ref="reports" />
+    
+  </body>
+</project>

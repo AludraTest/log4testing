@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://aludratest.org/log4testing/1.0">
+
+	<properties>
+		<property>
+			<key>someKey</key>
+			<value>someValue</value>
+		</property>
+		<property>
+			<key>someOtherKey</key>
+			<value>someOtherValue</value>
+		</property>
+	</properties>
+	
+	<abbreviations>
+		<abbreviation>
+			<text>foo</text>
+			<replacement>bar</replacement>
+		</abbreviation>
+		<abbreviation>
+			<text>apples</text>
+			<replacement>peaches</replacement>
+		</abbreviation>
+	</abbreviations>
+
+	<writers>
+		<writer>
+			<class>org.aludratest.log4testing.engine.MockTestLogWriter</class>
+			<properties>
+				<property>
+					<key>someWriterSpecificKey</key>
+					<value>Blabla ${someKey}</value>
+				</property>
+			</properties>
+			
+			<testStepFilters>
+				<testStepFilter>
+					<class>org.aludratest.log4testing.engine.MockTestStepFilter</class>
+					<properties>
+						<property>
+							<key>someFilterSpecificKey</key>
+							<!-- should not be replaced!! -->
+							<value>apples are ${someOtherKey}</value>
+						</property>
+					</properties>
+				</testStepFilter>
+			</testStepFilters>
+		</writer>
+	</writers>	
+
+</configuration>
