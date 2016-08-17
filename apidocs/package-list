@@ -1,0 +1,9 @@
+org.aludratest.log4testing
+org.aludratest.log4testing.config
+org.aludratest.log4testing.config.impl
+org.aludratest.log4testing.engine
+org.aludratest.log4testing.filter
+org.aludratest.log4testing.html
+org.aludratest.log4testing.output
+org.aludratest.log4testing.util
+org.aludratest.log4testing.xml

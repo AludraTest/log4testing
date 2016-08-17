@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20160817" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Log4Testing &#x2013; About</title>
+    <title>Log4Testing &#x2013; HTML Test Log Writer</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.4.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -58,14 +58,14 @@
                     
                 <ul class="nav nav-list">
                     <li class="nav-header">User Documentation</li>
-                                                                                                                                                        
+                                                                                                                                                                  
       <li>
   
                           <a href="configuration.html" title="Configuration">
           <span class="icon-chevron-down"></span>
         Configuration</a>
                     <ul class="nav nav-list">
-                                                                                                                      
+                                                                                                                                
       <li>
   
                           <a href="writers.html" title="Log Writers and Filters">
@@ -73,12 +73,10 @@
         Log Writers and Filters</a>
                     <ul class="nav nav-list">
                     
-      <li>
+      <li class="active">
   
-                          <a href="htmlwriter.html" title="HTML Writer">
-          <span class="none"></span>
-        HTML Writer</a>
-            </li>
+            <a href="#"><span class="none"></span>HTML Writer</a>
+          </li>
                     
       <li>
   
@@ -105,104 +103,13 @@
               </ul>
         </li>
                               <li class="nav-header">Project Documentation</li>
-                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                        
       <li>
   
                           <a href="project-info.html" title="Project Information">
-          <span class="icon-chevron-down"></span>
+          <span class="icon-chevron-right"></span>
         Project Information</a>
-                    <ul class="nav nav-list">
-                    
-      <li class="active">
-  
-            <a href="#"><span class="none"></span>About</a>
-          </li>
-                    
-      <li>
-  
-                          <a href="plugin-management.html" title="Plugin Management">
-          <span class="none"></span>
-        Plugin Management</a>
-            </li>
-                    
-      <li>
-  
-                          <a href="distribution-management.html" title="Distribution Management">
-          <span class="none"></span>
-        Distribution Management</a>
-            </li>
-                    
-      <li>
-  
-                          <a href="dependency-info.html" title="Dependency Information">
-          <span class="none"></span>
-        Dependency Information</a>
-            </li>
-                    
-      <li>
-  
-                          <a href="source-repository.html" title="Source Repository">
-          <span class="none"></span>
-        Source Repository</a>
-            </li>
-                    
-      <li>
-  
-                          <a href="mail-lists.html" title="Mailing Lists">
-          <span class="none"></span>
-        Mailing Lists</a>
-            </li>
-                    
-      <li>
-  
-                          <a href="issue-tracking.html" title="Issue Tracking">
-          <span class="none"></span>
-        Issue Tracking</a>
-            </li>
-                    
-      <li>
-  
-                          <a href="integration.html" title="Continuous Integration">
-          <span class="none"></span>
-        Continuous Integration</a>
-            </li>
-                    
-      <li>
-  
-                          <a href="plugins.html" title="Project Plugins">
-          <span class="none"></span>
-        Project Plugins</a>
-            </li>
-                    
-      <li>
-  
-                          <a href="license.html" title="Project License">
-          <span class="none"></span>
-        Project License</a>
-            </li>
-                    
-      <li>
-  
-                          <a href="team-list.html" title="Project Team">
-          <span class="none"></span>
-        Project Team</a>
-            </li>
-                    
-      <li>
-  
-                          <a href="project-summary.html" title="Project Summary">
-          <span class="none"></span>
-        Project Summary</a>
-            </li>
-                    
-      <li>
-  
-                          <a href="dependencies.html" title="Dependencies">
-          <span class="none"></span>
-        Dependencies</a>
-            </li>
-              </ul>
-        </li>
+                  </li>
                                                                                                                         
       <li>
   
@@ -232,8 +139,49 @@
         <div id="bodyColumn"  class="span10" >
                                   
             <div class="section">
-<h2><a name="About_Log4Testing"></a>About Log4Testing</h2><a name="About_Log4Testing"></a>
-<p>A configurable Logging Framework for generic test execution logging. Supports several output formats, including XML and HTML, and can be connected to different testing frameworks.</p></div>
+<h2><a name="HTML_Test_Log_Writer"></a>HTML Test Log Writer</h2>
+<p>This writer generates HTML based Test Logs. It uses Velocitymacro templates to generate the HTML files. The templates can be replaced with custom templates, if desired. Additional resources which are copied to the HTML output directory can be specified.</p>
+<p>The log files are written and updated continuously during test execution, so you can check them for already finished tests even when other tests are still being executed. </p>
+<div class="section">
+<h3><a name="Configuration_options"></a>Configuration options</h3>
+<table border="1" class="table table-striped">
+<tr class="a">
+<th align="left">Property</th>
+<th align="left">Description</th>
+<th align="left">Default value</th></tr>
+<tr class="b">
+<td align="left"><tt>outputFolder</tt></td>
+<td align="left">The root output folder to write the HTML logs to.</td>
+<td align="left"><tt>target/log4testing</tt></td></tr>
+<tr class="a">
+<td align="left"><tt>dateTimeFormat</tt></td>
+<td align="left">The format for outputting Date / Time values.</td>
+<td align="left"><tt>dd-MMM-yyyy HH:mm:ss</tt></td></tr>
+<tr class="b">
+<td align="left"><tt>additionalResources</tt></td>
+<td align="left">Comma-separated list of files to copy to the root output folder. Must be located in current working directory, on Context Classloader Classpath, or on Log4Testing's Classpath.</td>
+<td align="left"><tt>log4testing.css,testcase.js,jquery.js</tt></td></tr>
+<tr class="a">
+<td align="left"><tt>suiteMacroFile</tt></td>
+<td align="left">Velocitymacro file to use to render Test Suite HTML pages. Velocitymacro's <i>code</i>ClasspathResourceLoader<i>/code</i> is used for lookup.</td>
+<td align="left"><tt>testSuite.vm</tt>, in Writer's package</td></tr>
+<tr class="b">
+<td align="left"><tt>testCaseMacroFile</tt></td>
+<td align="left">Velocitymacro file to use to render Test Case HTML pages. Velocitymacro's <i>code</i>ClasspathResourceLoader<i>/code</i> is used for lookup.</td>
+<td align="left"><tt>testCase.vm</tt>, in Writer's package</td></tr></table></div>
+<div class="section">
+<h3><a name="Output_format_details"></a>Output format details</h3>
+<p>Each test suite and test case is stored depending on its name. Dots in the name will be replaced by slashes, so the mapping works as follows:</p>
+<div class="source"><pre class="prettyprint">com.myacme.testproject.app1.MainTestSuite
+</pre></div>
+<p>is logged in</p>
+<div class="source"><pre class="prettyprint">com/myacme/testproject/app1/MainTestSuite.html
+</pre></div>
+<p>seen from the root output folder. Same applies for test cases. </p>
+<p>The suite HTML files sum up the results from contained child suites and test cases, and contain links to each test case.</p></div>
+<div class="section">
+<h3><a name="Template_customization"></a>Template customization</h3>
+<p>If you want to provide a custom template, please have a look at the default ones contained in log4testing. You will see the helper classes used by them. Best would be to take them as a start and customize them to your needs.</p></div></div>
                   </div>
             </div>
           </div>
