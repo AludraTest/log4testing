@@ -44,7 +44,7 @@ Configuration
 </configuration>
 +------------------------------------------+
  
- You can refer to defined properties in your <<<log4testing.xml>>> almost everywhere, using the syntax <<<${myOutputRootPath}>>>.
+ You can refer to defined properties in your <<<log4testing.xml>>> almost everywhere, using the syntax <<<$\{myOutputRootPath\}>>>.
  See {{{./writers.html}Log Writers & Filters}} for an example.
  
 * Abbreviations
