@@ -42,7 +42,7 @@ XML Test Log Writer
       
       <testCases>
         <testCase>
-          <name>MyFirstTestcase/name>
+          <name>MyFirstTestcase</name>
           <id>3</id>
           <startTime>2016-07-07T11:11:04.531+02:00</startTime>
           <endTime>2016-07-07T11:12:17.488+02:00</endTime>
