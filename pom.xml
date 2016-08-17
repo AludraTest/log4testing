@@ -265,15 +265,7 @@
 					<plugin>
 						<groupId>com.github.github</groupId>
 						<artifactId>site-maven-plugin</artifactId>
-						<version>0.10</version>
-						<!-- fix wrong dependency in 0.10 -->
-						<dependencies>
-							<dependency>
-								<groupId>org.eclipse.mylyn.github</groupId>
-								<artifactId>org.eclipse.egit.github.core</artifactId>
-								<version>2.1.5</version>
-							</dependency>
-						</dependencies>
+						<version>0.12</version>
 						<configuration>
 							<server>github</server>
 							<message>Updating site for ${project.artifactId} ${project.version}</message>
@@ -321,6 +313,20 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.9.1</version>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.5</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.6</version>
+				<configuration>
+					<linkXref>true</linkXref>
+					<sourceEncoding>utf-8</sourceEncoding>
+				</configuration>
+			</plugin>
 		</plugins>
 	</reporting>
 
@@ -335,7 +341,7 @@
 		<url>https://github.com/AludraTest/log4testing/issues</url>
 		<system>GitHub Issues</system>
 	</issueManagement>
-
+	
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>

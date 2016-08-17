@@ -1,0 +1,84 @@
+   --------------------
+   Configuration
+   --------------------
+
+Configuration
+
+ To configure Log4Testing in conjunction with a Test Framework using Log4Testing (like AludraTest), you will need to provide
+ a <<<log4testing.xml>>> configuration file. This file must either be available in classpath root of Context ClassLoader or
+ of Log4Testing's classloader, or in current working directory.
+ 
+ (If you use Log4Testing for another Framework than AludraTest, other locations for this file may as well be possible. 
+ Please refer to Test Framework's documentation for possible locations.)
+ 
+ The root element of the <<<log4testing.xml>>> must be a <<<\<configuration\>>>> element. Its namespace must be
+ <<<http://aludratest.org/log4testing/1.0>>>. So this is the most simple configuration file, which writes <<no>> test log at all:
+ 
++------------------------------------------+
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://aludratest.org/log4testing/1.0">
+</configuration>
++------------------------------------------+
+
+* Properties
+
+ One core element of the configuration XML format are <Properties>. They can be specified on many levels, with different effects,
+ depending on the context.
+ 
+ Every property element consists of a <<<key>>> and a <<<value>>>.
+ 
+ On a global level, you can specify properties for your whole <<<log4testing.xml>>>, which can be reused e.g. in configuration
+ elements of <Writers> or <Filters>. This could look like this:
+ 
++------------------------------------------+
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://aludratest.org/log4testing/1.0">
+  <properties>
+    <property>
+      <key>myOutputRootPath</key>
+      <value>target/testlogs</value>
+    </property>
+  </properties>
+  
+  <!-- more configuration to come -->  
+</configuration>
++------------------------------------------+
+ 
+ You can refer to defined properties in your <<<log4testing.xml>>> almost everywhere, using the syntax <<<${myOutputRootPath}>>>.
+ See {{{./writers.html}Log Writers & Filters}} for an example.
+ 
+* Abbreviations
+
+ Especially in conjunction with AludraTest, Test Suite and Test Case names can get quite lengthy, as they are derived from their
+ Java Class names. As they usually share a common prefix, you could remove this prefix. For lengthy package names, you could
+ introduce abbreviations. This keeps your log files better readable:
+ 
++------------------------------------------+
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://aludratest.org/log4testing/1.0">
+  <abbreviations>
+    <abbreviation>
+      <text>com.myacme.functionaltests.</text>
+      <replacement />
+    </abbreviation>
+    
+    <abbreviation>
+    	<text>lengthyappname</text>
+    	<replacement>lan</replacement>
+    </abbreviation>
+  </abbreviations>
+  
+  <!-- more configuration to come -->  
+</configuration>
++------------------------------------------+
+ 
+ In this example, the common prefix <code>com.myacme.functionaltests.</code> is removed from all Test Suite and Test Case names 
+ (note the trailing dot to not have their names start with a dot). This is configured with an <<<abbreviation>>> element with an
+ empty <<<replacement>>>.
+ 
+ Also, if the <code>lengthyappname</code> appears somewhere in the name of Test Suites or Test Cases, it is replaced by <code>lan</code>.
+
+* Writers and Filters
+
+ This is where the above-described global configuration (if any) is applied. Writers and Filters configure <<what>> is logged, <<where>>,
+ and <<how>>. See {{{./writers.html}Test Log Writers & Filters}} for the documentation of this most important section.

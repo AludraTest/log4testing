@@ -11,8 +11,8 @@ package org.aludratest.log4testing.engine;
  */
 public interface TestFramework {
 	
-	public void addTestFrameworkListener(TestFrameworkListener listener);
+	void addTestFrameworkListener(TestFrameworkListener listener);
 
-	public void removeTestFrameworkListener(TestFrameworkListener listener);
+	void removeTestFrameworkListener(TestFrameworkListener listener);
 
 }

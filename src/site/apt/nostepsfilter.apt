@@ -1,0 +1,15 @@
+   --------------------
+   NoSteps Test Step Filter
+   --------------------
+
+NoSteps Test Step Filter
+
+ This filter filters out <<all>> test steps from logging. This leads to <Test Step Groups> being the lowest level of information
+ being available in the Test Logs. This filter can be extremely useful for XML logs, where only high-level information is required,
+ e.g. for statistical analysis.
+
+ Use <<<org.aludratest.log4testing.filter.NoTestStepsFilter>>> as filter class name to apply this filter to a writer.
+ 
+* Configuration options
+
+ <none>

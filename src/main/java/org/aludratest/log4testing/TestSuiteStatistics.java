@@ -2,28 +2,28 @@ package org.aludratest.log4testing;
 
 public interface TestSuiteStatistics {
 
-	public int getNumberOfTestCases();
+	int getNumberOfTestCases();
 
-	public int getNumberOfChildSuites();
+	int getNumberOfChildSuites();
 
-	public int getNumberOfPassedTestCases();
+	int getNumberOfPassedTestCases();
 
-	public int getNumberOfFailedTestCases();
+	int getNumberOfFailedTestCases();
 
-	public int getNumberOfIgnoredTestCases();
+	int getNumberOfIgnoredTestCases();
 
-	public int getNumberOfFunctionallyFailedTestCases();
+	int getNumberOfFunctionallyFailedTestCases();
 
-	public int getNumberOfFailedAccessTestCases();
+	int getNumberOfFailedAccessTestCases();
 
-	public int getNumberOfFailedPerformanceTestCases();
+	int getNumberOfFailedPerformanceTestCases();
 
-	public int getNumberOfAutomationFailedTestCases();
+	int getNumberOfAutomationFailedTestCases();
 
-	public int getNumberOfInconclusiveTestCases();
+	int getNumberOfInconclusiveTestCases();
 
-	public int getNumberOfIgnoredAndPassedTestCases();
+	int getNumberOfIgnoredAndPassedTestCases();
 
-	public int getNumberOfIgnoredAndFailedTestCases();
+	int getNumberOfIgnoredAndFailedTestCases();
 
 }

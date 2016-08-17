@@ -25,7 +25,7 @@ public final class PathUtils {
 	 * @param pathSeparator
 	 *            directory separator. The platform default is not assumed so that we can test Unix behaviour when running on
 	 *            Windows (for example)
-	 * @return
+	 * @return The relative path from one file to another.
 	 */
 	public static String getRelativePath(String targetPath, String basePath, String pathSeparator) {
 		// taken from http://stackoverflow.com/a/3054692/2235015 (slightly adjusted here for our needs)

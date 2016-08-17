@@ -39,6 +39,12 @@ import org.joda.time.format.PeriodFormatterBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * A Test Log writer generating HTML pages with the help of VelocityMacro templates.
+ * 
+ * @author falbrech
+ *
+ */
 public class HtmlTestLogWriter implements TestLogWriter {
 
 	private static final Logger LOG = LoggerFactory.getLogger(HtmlTestLogWriter.class);

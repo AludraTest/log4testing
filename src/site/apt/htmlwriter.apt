@@ -1,0 +1,54 @@
+   --------------------
+   HTML Test Log Writer
+   --------------------
+
+HTML Test Log Writer
+
+ This writer generates HTML based Test Logs. It uses Velocitymacro templates to generate the HTML files. The templates
+ can be replaced with custom templates, if desired. Additional resources which are copied to the HTML output directory
+ can be specified.
+ 
+ The log files are written and updated continuously during test execution, so you can check them for already finished
+ tests even when other tests are still being executed. 
+ 
+* Configuration options
+
+*-------------+----------------+-----------------+
+|| Property    || Description  || Default value ||
+*-------------+----------------+-----------------+
+| <<<outputFolder>>>  | The root output folder to write the HTML logs to. | <<<target/log4testing>>> |
+*-------------+----------------+-----------------+
+| <<<dateTimeFormat>>> | The format for outputting Date / Time values. | <<<dd-MMM-yyyy HH:mm:ss>>> |
+*-------------+----------------+-----------------+
+| <<<additionalResources>>> | Comma-separated list of files to copy to the root output folder. | <<<log4testing.css,testcase.js,jquery.js>>> |
+|                           | Must be located in current working directory, on Context Classloader Classpath, or on Log4Testing's Classpath. | |
+*-------------+----------------+-----------------+
+| <<<suiteMacroFile>>> | Velocitymacro file to use to render Test Suite HTML pages. Velocitymacro's <code>ClasspathResourceLoader</code> is used for lookup. | <<<testSuite.vm>>>, in Writer's package|
+*-------------+----------------+-----------------+
+| <<<testCaseMacroFile>>> | Velocitymacro file to use to render Test Case HTML pages. Velocitymacro's <code>ClasspathResourceLoader</code> is used for lookup. | <<<testCase.vm>>>, in Writer's package|
+*-------------+----------------+-----------------+
+
+* Output format details
+
+ Each test suite and test case is stored depending on its name. Dots in the name will be replaced by slashes, so the mapping works as follows:
+ 
++------------------------------------------+
+com.myacme.testproject.app1.MainTestSuite
++------------------------------------------+
+
+ is logged in
+
++------------------------------------------+
+com/myacme/testproject/app1/MainTestSuite.html
++------------------------------------------+
+
+ seen from the root output folder. Same applies for test cases. 
+
+ The suite HTML files sum up the results from contained child suites and test cases, and contain links to each test case.
+ 
+ 
+* Template customization
+
+ If you want to provide a custom template, please have a look at the default ones contained in log4testing. You will see the
+ helper classes used by them. Best would be to take them as a start and customize them to your needs.
+  

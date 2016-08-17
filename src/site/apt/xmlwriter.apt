@@ -1,0 +1,116 @@
+   --------------------
+   XML Test Log Writer
+   --------------------
+
+XML Test Log Writer
+
+ This writer generates Test Logs in an XML format. Contrary to the {{{./htmlwriter.html}HTML Log Writer}}, which continuously
+ creates and updates the HTML files during test execution, this writer only creates <<one>> XML file, which is written when the
+ complete test execution is finished.
+ 
+* Configuration options
+
+*-------------+----------------+-----------------+
+|| Property    || Description  || Default value ||
+*-------------+----------------+-----------------+
+| <<<outputFile>>>  | The path to the XML or GZIP file to write. | <<<target/testResults.xml>>> |
+*-------------+----------------+-----------------+
+| <<<compress>>> | If <<<true>>>, the file will be GZIP-compressed. <<<outputFile>>> should name a file with extension <<<.xml.gz>>> in this case. | <<<false>>> |
+*-------------+----------------+-----------------+
+| <<<includeAttachments>>> | If <<<true>>>, attachments attached to test steps are included in the XML (in Base64 encoding). This can result in VERY large XML files, so you may want to deactivate this. | <<<true>>> |
+*-------------+----------------+-----------------+
+
+* Output format details
+
+ This is the XML structure which is created by the XML writer (line breaks are only for better readability here):
+  
++------------------------------------------+
+<?xml version="1.0" encoding="UTF-8"?>
+<testSuite>
+  <name>Example Suite</name>
+  <id>1</id>
+  <startTime>2016-07-07T11:11:02.969+02:00</startTime>
+  <endTime>2016-07-07T19:21:04.081+02:00</endTime>
+  <duration>PT29401.112S</duration>
+  <work>PT344802.062S</work>
+  <status>FAILED</status>
+  
+  <testSuites>
+    <testSuite>
+      <name>...</name>
+      ...
+      
+      <testCases>
+        <testCase>
+          <name>MyFirstTestcase/name>
+          <id>3</id>
+          <startTime>2016-07-07T11:11:04.531+02:00</startTime>
+          <endTime>2016-07-07T11:12:17.488+02:00</endTime>
+          <duration>PT72.957S</duration>
+          <work>PT72.957S</work>
+          <status>PASSED</status>
+          <testStepGroups>
+            <testStepGroup>
+              <name>Login</name>
+              <id>4255</id>
+              <status>PASSED</status>
+              <testSteps>
+                <testStep>
+                  <id>3</id>
+                  <startTime>2016-07-07T11:11:04.531+02:00</startTime>
+                  <endTime>2016-07-07T11:12:17.488+02:00</endTime>
+                  <duration>PT1.21S</duration>
+                  <work>PT1.21S</work>
+                  <status>PASSED</status>
+                  <offsetSeconds>0</offsetSeconds>
+                  <command>click</command>
+                  <elementType>Button</elementType>
+                  <elementName>login</elementName>
+                  <technicalLocator>loginBtn</technicalLocator>
+                  <usedArguments />
+                  <service />
+                  <result />
+                  <errorMessage />
+                  <error />
+                  <comment />
+                  <attachments>
+                    <attachment>
+                      <label>Screenshot</label>
+                      <fileExtension>png</fileExtension>
+                      <fileContents>iVBORw0KGgoAAAANSUhEUgAAAC4AAAAdCAYAAADVV140AAAAC...</fileContents>
+                    </attachment>
+                  </attachments>
+                </testStep>
+                <testStep>
+                  ...
+                </testStep>
+              </testSteps>
+            </testStepGroup>
+            <testStepGroup>
+              ...
+            </testStepGroup>
+          </testStepGroups>
+        </testCase>
+        <testCase>
+          ...
+        </testCase>
+      </testCases>
+    </testSuite>
+    <testSuite>
+      ...
+    </testSuite>
+  </testSuites>
+</testSuite>
++------------------------------------------+
+
+ Please note the following:
+ 
+ * Test Suites can contain child suites, test cases, or a combination of both.
+ 
+ * Test cases could be located on every level of suites.
+ 
+ * Attachments are only written when enabled for the writer (see configuration section above).
+ 
+ * If a <Step Filter> is active for this writer, filtered steps are excluded from the XML.
+ 
+ * When processing the generated XML with other XML tools, e.g. XSLT, remember to include the log4testing namespace when specifying tag names.

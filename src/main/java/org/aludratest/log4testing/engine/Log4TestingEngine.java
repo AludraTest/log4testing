@@ -23,15 +23,11 @@ public final class Log4TestingEngine implements TestFrameworkListener {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(Log4TestingEngine.class);
 
-	private Log4TestingConfiguration configuration;
-
 	private List<TestLogWriter> writers = new ArrayList<TestLogWriter>();
 
 	private List<WriterSpecificTestFrameworkListener> writerListeners = new ArrayList<WriterSpecificTestFrameworkListener>();
 
 	private Log4TestingEngine(Log4TestingConfiguration configuration) {
-		this.configuration = configuration;
-
 		for (TestLogWriterConfiguration writerConfig : configuration.getTestLogWriterConfigurations()) {
 			try {
 				Class<?> writerClass = Class.forName(writerConfig.getWriterClassName());

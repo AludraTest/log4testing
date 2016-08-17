@@ -5,16 +5,16 @@ import org.joda.time.Duration;
 
 public interface TestLogElement {
 
-	public int getId();
+	int getId();
 
-	public DateTime getStartTime();
+	DateTime getStartTime();
 
-	public DateTime getEndTime();
+	DateTime getEndTime();
 
-	public Duration getDuration();
+	Duration getDuration();
 
-	public Duration getWork();
+	Duration getWork();
 
-	public TestStatus getStatus();
+	TestStatus getStatus();
 
 }
