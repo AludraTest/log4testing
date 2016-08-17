@@ -17,6 +17,7 @@
   				<item name="NoSteps Test Step Filter" href="nostepsfilter.html" />
   			</item>
   		</item>
+  		<item name="Usage" href="usage.html" />
   	</menu>
  
     <menu ref="reports" />

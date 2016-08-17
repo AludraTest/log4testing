@@ -1,0 +1,46 @@
+   --------------------
+   Usage
+   --------------------
+
+Usage
+
+ This page describes how to use Log4Testing with your own or an existing Test Framework other than AludraTest. If you
+ just want to use Log4Testing in conjunction with AludraTest and want to know how to configure it, please refer to {{{./configuration.html}Configuration}}
+ instead.
+ 
+* Entry Point
+
+ To have Log4Testing being attached to your framework, you will have to create an instance of <<<{{{./xref/org/aludratest/log4testing/engine/Log4TestingEngine.html}Log4TestingEngine}}>>>
+ and <apply> it to your framework with its <<<applyTo>>> method. This method requires a <<<{{{./xref/org/aludratest/log4testing/engine/TestFramework.html}TestFramework}}>>> object to
+ be passed - you will have to implement this interface for your framework.
+ 
+* TestFramework interface
+
+ The <<<TestFramework>>> interface offers two methods for adding and removing listeners to your framework. An added listener
+ must be notified about every test related event of the test framework - see the  <<<{{{./xref/org/aludratest/log4testing/engine/TestFrameworkListener.html}TestFrameworkListener}}>>>
+ interface for what events may be fired.
+ 
+ A common implementation of the <<<TestFramework>>> interface would be a class which stores the added listeners, hooks itself
+ as listener into the real Test Framework when the first listener is added, and unhooks itself when the last listener is removed. Events
+ fired by the real Test Framework are caught, and the appropriate methods of all listeners are called. This basic logic is implemented
+ by <<<{{{./xref/org/aludratest/log4testing/engine/AbstractTestFramework.html}AbstractTestFramework}}>>>, so consider subclassing
+ this class instead of implementing the whole interface by yourself.
+ 
+ Please note that for Log4Testing to work properly, all <<<start>>> and <<<finish>>> events for Process, Suite, and Test Case, must
+ be fired at some point in time. If the Test Framework e.g. only notifies about "Test Case" events, you will have to generate artificial
+ events for the listeners at appropriate points in time.
+
+* TestLog implementation
+
+ As you may have noticed, all parameters of the methods in the <<<TestFrameworkListener>>> interface are also interfaces, and there
+ are no default implementations within Log4Testing. This is intentional. Depending on the underlying Test Framework, implementation
+ of these interfaces may vary heavily. For some Test Frameworks, you will be able to write adapters. In an own framework which
+ explicitly uses Log4Testing (like AludraTest), you even could just implement these interfaces directly in the framework (like AludraTest does).
+
+* Custom Configuration location
+
+ Log4Testing is already quite flexible in where to look for its <<<log4testing.xml>>>, see {{{./configuration.html}Configuration}}. 
+ But perhaps you want to provide a different location for the configuration file - perhaps even a different name than <<<log4testing.xml>>>?
+ Then checkout the <<<Log4TestingEngine.newEngine(URL)>>> method, which allows you to specify a custom location where to look for
+ the configuration file.
+
