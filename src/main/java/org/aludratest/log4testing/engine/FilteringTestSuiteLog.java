@@ -7,7 +7,7 @@ import org.aludratest.log4testing.TestCaseLog;
 import org.aludratest.log4testing.TestSuiteLog;
 import org.aludratest.log4testing.TestSuiteStatistics;
 
-public class FilteringTestSuiteLog extends FilteringNamedTestLogElement<TestSuiteLog> implements TestSuiteLog {
+class FilteringTestSuiteLog extends FilteringNamedTestLogElement<TestSuiteLog> implements TestSuiteLog {
 
 	public FilteringTestSuiteLog(TestSuiteLog delegate, LogContext logContext) {
 		super(delegate, logContext);

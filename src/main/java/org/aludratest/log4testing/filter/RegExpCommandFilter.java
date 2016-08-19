@@ -8,6 +8,12 @@ import org.aludratest.log4testing.TestStepFilter;
 import org.aludratest.log4testing.TestStepLog;
 import org.aludratest.log4testing.config.InvalidConfigurationException;
 
+/**
+ * A filter checking the <code>command</code> attribute of test steps to match a given regular expression.
+ * 
+ * @author falbrech
+ *
+ */
 public class RegExpCommandFilter implements TestStepFilter {
 
 	private String commandRegexp;

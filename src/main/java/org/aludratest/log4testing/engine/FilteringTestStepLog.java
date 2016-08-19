@@ -13,7 +13,7 @@ import org.aludratest.log4testing.TestStepLogContainer;
  * @author falbrech
  * 
  */
-public class FilteringTestStepLog extends FilteringTestLogElement<TestStepLog> implements TestStepLog {
+class FilteringTestStepLog extends FilteringTestLogElement<TestStepLog> implements TestStepLog {
 
 	public FilteringTestStepLog(TestStepLog delegate, LogContext context) {
 		super(delegate, context);

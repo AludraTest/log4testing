@@ -7,7 +7,8 @@ import org.aludratest.log4testing.TestCaseLog;
 import org.aludratest.log4testing.TestSuiteLog;
 
 /**
- * Convenience abstract base class, implementing the listener infrastructure. Calls
+ * Convenience abstract base class, implementing the listener infrastructure. Calls {@link #hook()} when the first listener is
+ * added, and {@link #unhook()} when the last listener is removed.
  * 
  * @author falbrech
  * 

@@ -9,7 +9,7 @@ import org.aludratest.log4testing.TestStepFilter;
 import org.aludratest.log4testing.TestStepGroupLog;
 import org.aludratest.log4testing.TestStepLog;
 
-public class FilteringTestStepGroupLog extends FilteringNamedTestLogElement<TestStepGroupLog> implements TestStepGroupLog {
+class FilteringTestStepGroupLog extends FilteringNamedTestLogElement<TestStepGroupLog> implements TestStepGroupLog {
 
 	public FilteringTestStepGroupLog(TestStepGroupLog delegate, LogContext logContext) {
 		super(delegate, logContext);

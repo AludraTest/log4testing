@@ -4,7 +4,8 @@ import java.util.Map;
 
 import org.aludratest.log4testing.NamedTestLogElement;
 
-public abstract class FilteringNamedTestLogElement<T extends NamedTestLogElement> extends FilteringTestLogElement<T> implements
+abstract class FilteringNamedTestLogElement<T extends NamedTestLogElement> extends FilteringTestLogElement<T>
+		implements
 		NamedTestLogElement {
 
 	protected FilteringNamedTestLogElement(T delegate, LogContext logContext) {

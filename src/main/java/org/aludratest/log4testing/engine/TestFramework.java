@@ -11,8 +11,21 @@ package org.aludratest.log4testing.engine;
  */
 public interface TestFramework {
 	
+	/**
+	 * Adds the given listener to the list of listeners to be notified about Test Framework events. If an identical listener is
+	 * already registered, this method must not add it again.
+	 * 
+	 * @param listener
+	 *            Listener to add.
+	 */
 	void addTestFrameworkListener(TestFrameworkListener listener);
 
+	/**
+	 * Removes the given listener from the list of listeners. If no such listener is registered, this method does nothing.
+	 * 
+	 * @param listener
+	 *            Listener to remove.
+	 */
 	void removeTestFrameworkListener(TestFrameworkListener listener);
 
 }

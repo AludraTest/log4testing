@@ -5,7 +5,7 @@ import org.aludratest.log4testing.TestStatus;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
-public abstract class FilteringTestLogElement<T extends TestLogElement> implements TestLogElement {
+abstract class FilteringTestLogElement<T extends TestLogElement> implements TestLogElement {
 	
 	private T delegate;
 	
