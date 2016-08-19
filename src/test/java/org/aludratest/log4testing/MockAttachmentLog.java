@@ -2,33 +2,20 @@ package org.aludratest.log4testing;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
-import org.aludratest.log4testing.AttachmentLog;
+public class MockAttachmentLog extends AbstractAttachmentLog {
 
-public class MockAttachmentLog implements AttachmentLog {
-
-	private String label;
-	private String extension;
 	private byte[] contents;
 
-	public MockAttachmentLog(String label, String extension, String contents) {
-		this(label, extension, contents.getBytes());
+	public MockAttachmentLog(String label, String extension, String contents) throws UnsupportedEncodingException {
+		super(label, extension);
+		this.contents = contents.getBytes("UTF-8");
 	}
 
 	public MockAttachmentLog(String label, String extension, byte[] contents) {
-		this.label = label;
-		this.extension = extension;
+		super(label, extension);
 		this.contents = contents;
-	}
-
-	@Override
-	public String getLabel() {
-		return label;
-	}
-
-	@Override
-	public String getFileExtension() {
-		return extension;
 	}
 
 	@Override

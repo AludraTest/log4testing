@@ -7,9 +7,9 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
+import org.aludratest.log4testing.AbstractTestLogWriterTest;
 import org.aludratest.log4testing.MockAttachmentLog;
 import org.aludratest.log4testing.MockTestCaseLog;
 import org.aludratest.log4testing.MockTestStepGroupLog;
@@ -30,13 +30,10 @@ import org.junit.Test;
  * @author falbrech
  * 
  */
-public class HtmlTestLogWriterTest {
-
-	private AtomicInteger objectId = new AtomicInteger();
+public class HtmlTestLogWriterTest extends AbstractTestLogWriterTest {
 
 	@Before
 	public void clearRootFolder() throws IOException {
-		objectId.set(0);
 		File f = getRootFolder();
 		if (f.isDirectory()) {
 			FileUtils.deleteDirectory(f);
@@ -179,36 +176,5 @@ public class HtmlTestLogWriterTest {
 
 		assertTrue(new File(getRootFolder(), "custom.vm").isFile());
 	}
-
-	private MockTestSuiteLog createSuite(String name) {
-		return new MockTestSuiteLog(objectId.incrementAndGet(), name);
-	}
-
-	private MockTestSuiteLog createSuite(String name, MockTestSuiteLog parent) {
-		MockTestSuiteLog suite = new MockTestSuiteLog(objectId.incrementAndGet(), name, parent);
-		parent.addTestSuite(suite);
-		return suite;
-	}
-
-	private MockTestCaseLog createTestCase(String name, MockTestSuiteLog parent) {
-		MockTestCaseLog testCase = new MockTestCaseLog(objectId.incrementAndGet(), name, parent);
-		parent.addTestCase(testCase);
-		return testCase;
-	}
-
-	private MockTestStepGroupLog createStepGroup(String name, MockTestCaseLog parent) {
-		MockTestStepGroupLog group = new MockTestStepGroupLog(objectId.incrementAndGet(), name, parent);
-		parent.addTestStepGroup(group);
-		return group;
-	}
-
-	private MockTestStepLog createStep(String command, TestStatus status, MockTestStepGroupLog parent) {
-		MockTestStepLog step = new MockTestStepLog(objectId.incrementAndGet(), parent);
-		step.setStatus(status);
-		step.setCommand(command);
-		parent.addTestStep(step);
-		return step;
-	}
-
 
 }
