@@ -4,7 +4,7 @@ import java.util.Map;
 
 /**
  * Interface for the abbreviations configuration of a Log4Testing configuration. Abbreviations are completely defined by a Map of
- * String -> Replacement pairs.
+ * String -&gt; Replacement pairs.
  * 
  * @author falbrech
  *
