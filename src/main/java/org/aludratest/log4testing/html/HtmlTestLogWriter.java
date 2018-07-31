@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * A Test Log writer generating HTML pages with the help of VelocityMacro templates.
- * 
+ *
  * @author falbrech
  *
  */
@@ -60,9 +60,9 @@ public class HtmlTestLogWriter implements TestLogWriter {
 	private static final String DEFAULT_ADDITIONAL_RESOURCES = "log4testing.css,testcase.js,jquery.js";
 
 	private File rootFolder;
-	
+
 	private Template suiteTemplate;
-	
+
 	private Template testCaseTemplate;
 
 	private VelocityEngine velocityEngine;
@@ -74,11 +74,12 @@ public class HtmlTestLogWriter implements TestLogWriter {
 	@Override
 	public void init(Properties properties) throws InvalidConfigurationException {
 		rootFolder = new File(properties.getProperty("outputFolder", "target/log4testing"));
+		rootFolder = rootFolder.getAbsoluteFile();
 		rootFolder.mkdirs();
 		if (!rootFolder.isDirectory()) {
 			throw new InvalidConfigurationException("Could not create output folder " + rootFolder.getAbsolutePath());
 		}
-		
+
 		try {
 			dateTimeFormat = DateTimeFormat.forPattern(properties.getProperty("dateTimeFormat", DEFAULT_DATE_TIME_FORMAT));
 		}
@@ -336,7 +337,7 @@ public class HtmlTestLogWriter implements TestLogWriter {
 
 	/**
 	 * Formats texts in HTML.
-	 * 
+	 *
 	 * @author Volker Bergmann
 	 */
 	public class HtmlFormat {

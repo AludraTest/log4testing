@@ -32,9 +32,9 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Writes log results to an XML file. The whole file is only written when {@link #finishedTestProcess(TestSuiteLog)} is called, so
  * no XML is available during the tests run.
- * 
+ *
  * @author falbrech
- * 
+ *
  */
 public class XmlTestLogWriter implements TestLogWriter {
 
@@ -52,14 +52,14 @@ public class XmlTestLogWriter implements TestLogWriter {
 		compress = Boolean.valueOf(properties.getProperty("compress", "false"));
 		includeAttachments = Boolean.valueOf(properties.getProperty("includeAttachments", "true"));
 
-		xmlFile = new File(fileName);
+		xmlFile = new File(fileName).getAbsoluteFile();
 		xmlFile.getParentFile().mkdirs();
 		try {
 			// check that file is writable; reset file
 			new FileOutputStream(xmlFile).close();
 		}
 		catch (IOException e) {
-			throw new InvalidConfigurationException("Could not create XML output file " + xmlFile.getAbsolutePath(), e);
+			throw new InvalidConfigurationException("Could not create XML output file " + xmlFile.getPath(), e);
 		}
 	}
 
@@ -85,7 +85,7 @@ public class XmlTestLogWriter implements TestLogWriter {
 
 	@Override
 	public void finishedTestProcess(TestSuiteLog rootSuite) throws LogWriterException {
-		OutputStream os = null;		
+		OutputStream os = null;
 		try {
 			os = new BufferedOutputStream(new FileOutputStream(xmlFile));
 			if (compress) {
@@ -325,9 +325,9 @@ public class XmlTestLogWriter implements TestLogWriter {
 	/**
 	 * An adapter which writes ISO-8859-1 (which includes Base64 characters) stream data to the XML writer. This is only intended
 	 * for usage together with a wrapping Base64OutputStream and should not be used / copied to outside this class!
-	 * 
+	 *
 	 * @author falbrech
-	 * 
+	 *
 	 */
 	private static class XMLStreamWriterStream extends OutputStream {
 
